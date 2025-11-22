@@ -1,5 +1,6 @@
 # SR-FLIPFLOP-USING-CASE
-
+__NAME:PRADEEPA B
+DATE:22/11/2025__
 **AIM:**
 
 To implement  SR flipflop using verilog and validating their functionality using their functional tables
@@ -34,15 +35,66 @@ The maximum possible groupings of adjacent ones are already shown in the figure.
 
 **Procedure**
 
-/* write all the steps invloved */
+1.Type the program in Quartus software.
+2.Compile and run the program.
+3.Generate the RTL schematic and save the logic diagram.
+4.Create nodes for inputs and outputs to generate the timing diagram.
+5.For different input combinations generate the timing diagram.
 
 **PROGRAM**
 
-/* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by: RegisterNumber:
+/* Program for flipflops and verify its truth table in quartus using Verilog programming.
+SR USING CASE: 
+module sr_ff (s, r, clk, rst, q); 
+input s, r, clk, rst; 
+output reg q; 
+always @(posedge clk or posedge rst) 
+begin 
+    if (rst) 
+      q <= 0; // Reset the flip-flop 
+    else 
+ begin 
+      case ({s, r}) // S and R control the behavior 
+        2'b00: q <= q;    // No change 
+        2'b01: q <= 0;    // Reset 
+        2'b10: q <= 1;    // Set 
+        2'b11: q <= 0;    // Invalid state, typically treated as reset 
+      endcase 
+    end 
+  end 
+endmodule 
+The 2'b11 state for SR flip-flops is considered invalid because it implies setting and resetting the 
+flip-flop simultaneously, which is logically contradictory. To avoid unpredictable behavior or co
+ ntention in the circuit, this state is often treated as a reset (or sometimes as a "no change" state) 
+to ensure stability. 
+ 
+(or) 
+SR FLIPFLOP 
+ 
+module sr_ff(s,r,clk,q,qbar); 
+input s,r,clk; 
+output reg q; 
+output reg qbar; 
+initial  
+begin 
+q=0; 
+qbar=1; 
+end 
+always @(posedge clk) 
+begin 
+   q=s|(~r&q); 
+   qbar=r|(~s&~q); 
+end 
+endmodule
+
+Developed by: RegisterNumber:25017224
 */
 
 **RTL LOGIC FOR FLIPFLOPS**
+<img width="936" height="627" alt="sr flipflop circuit" src="https://github.com/user-attachments/assets/2a5c41ec-9e8f-452a-8e34-505ff3c92037" />
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
+<img width="1311" height="335" alt="sr flipflop wave" src="https://github.com/user-attachments/assets/9792658e-c729-4574-b50d-20bc1967ffb1" />
 
 **RESULTS**
+Implementing  SR flipflop  using verilog and validating their functionality using their functional tables executed successfully
